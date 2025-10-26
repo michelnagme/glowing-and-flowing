@@ -18,3 +18,33 @@ def test_third_example():
     capacities = [100000000, 99999999, 10000000, 1000000, 900000, 90000, 9000, 800, 80, 777]
 
     assert find_incidents_timing(n, k, capacities) == (61, 14285714)
+
+def test_min_inputs():
+    n, k = 1, 1
+    capacities = [1]
+
+    assert find_incidents_timing(n, k, capacities) == (1, 1)
+
+def test_max_inputs():
+    n, k = 100000, 100000           # n = k = 10^5 
+    capacities = [1000000000]*n     # c = 10^9 for all tanks
+
+    assert find_incidents_timing(n, k, capacities) == (10000, 10000)
+
+def test_max_iterations():
+    n, k = 100000, 1
+    capacities = [1000000000]*n
+
+    assert find_incidents_timing(n, k, capacities) == (1000000000, 1000000000)
+
+def test_zero_time_overflow():
+    n, k = 1, 100000
+    capacities = [1]
+
+    assert find_incidents_timing(n, k, capacities) == (0, 0)
+
+def test_zero_time_all_full():
+    n, k = 100000, 100000
+    capacities = [1]*n
+
+    assert find_incidents_timing(n, k, capacities) == (0, 0)
