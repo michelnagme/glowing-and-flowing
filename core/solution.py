@@ -5,14 +5,14 @@ def find_incidents_timing(n: int, k: int, capacities: list[int]) -> tuple[int, i
 
 def __input_sanity_check(n: int, k: int, capacities: list[int]):
     if not (1 <= n <= 10**5):
-        raise ValueError(f"n must be between 1 and 100000 (got {n})")
+        raise ValueError(f"n={n} is out of range [1, 10^5]")
     if not (1 <= k <= 10**5):
-        raise ValueError(f"k must be between 1 and 100000 (got {k})")
+        raise ValueError(f"k={k} is out of range [1, 10^5]")
     if len(capacities) != n:
         raise ValueError(f"Expected {n} capacities, got {len(capacities)}")
     for i, c in enumerate(capacities, 1):
         if not (1 <= c <= 10**9):
-            raise ValueError(f"capacity[{i}]={c} out of range [1, 1e9]")
+            raise ValueError(f"capacity[{i}]={c} out of range [1, 10^9]")
 
 def __last_tank_overflowing_time(n: int, k: int, capacities: list[int]) -> int:
     sum_from_the_end = 0
