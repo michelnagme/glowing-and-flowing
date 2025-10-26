@@ -1,3 +1,4 @@
+import pytest
 from solution import find_incidents_timing
 
 
@@ -31,12 +32,6 @@ def test_max_inputs():
 
     assert find_incidents_timing(n, k, capacities) == (10000, 10000)
 
-def test_max_iterations():
-    n, k = 100000, 1
-    capacities = [1000000000]*n
-
-    assert find_incidents_timing(n, k, capacities) == (1000000000, 1000000000)
-
 def test_zero_time_overflow():
     n, k = 1, 100000
     capacities = [1]
@@ -48,3 +43,54 @@ def test_zero_time_all_full():
     capacities = [1]*n
 
     assert find_incidents_timing(n, k, capacities) == (0, 0)
+
+def test_max_iterations():
+    n, k = 100000, 1
+    capacities = [1000000000]*n
+
+    assert find_incidents_timing(n, k, capacities) == (1000000000, 1000000000)
+
+def test_n_out_of_specifications():
+    n, k = 0, 1
+    capacities = []
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
+
+    n, k = 100001, 1
+    capacities = [10]*n
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
+
+def test_k_out_of_specifications():
+    n, k = 1, 0
+    capacities = [1]
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
+
+    n, k = 1, 100001
+    capacities = [1]
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
+
+def test_capacities_out_of_specifications():
+    n, k = 1, 1
+    capacities = [1, 1]
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
+
+    n, k = 1, 1
+    capacities = [0]
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
+
+    n, k = 1, 1
+    capacities = [1000000001]
+
+    with pytest.raises(ValueError):
+        find_incidents_timing(n, k, capacities)
