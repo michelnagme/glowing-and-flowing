@@ -19,6 +19,7 @@ Prints two space separated integers on a single line, stating the number of seco
 
 ## Requirements
 - Python 3.13 or higher
+- Pytest (tests only)
 
 ## Run
 Run the program using Python and redirect the input file into the script:
